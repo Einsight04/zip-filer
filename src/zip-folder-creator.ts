@@ -2,10 +2,16 @@ import JSZip from 'jszip';
 import fs from "fs";
 import path from 'path';
 
+type Files = {
+    [name: string]: string;
+}
+
 class ZipFolderCreator {
-    private files: { [name: string]: string } = {};
+    private readonly files: Files;
 
     constructor(...fileContents: string[]) {
+        this.files = {};
+
         fileContents.forEach((content, index) => {
             this.files[`file_${index}.txt`] = content;
         });
