@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import fs from "fs";
+import fs from "fs/promises";
 import path from 'path';
 
 type Files = {
@@ -26,7 +26,8 @@ class ZipFolderCreator {
 
         const content = await zip.generateAsync({ type: 'nodebuffer' });
         const outputFilePath = path.resolve(outputPath);
-        fs.writeFileSync(outputFilePath, content);
+
+        await fs.writeFile(outputFilePath, content);
     }
 }
 
